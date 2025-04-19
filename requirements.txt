@@ -1,0 +1,14 @@
+python-dotenv
+fastapi
+uvicorn
+pinecone
+langchain_pinecone
+langchain-groq
+langchain
+langchain_community
+pypdf
+rank_bm25
+google-generativeai
+gradio
+beautifulsoup4
+requests
