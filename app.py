@@ -4,7 +4,6 @@ from core.llm_processor import preprocess_input
 from core.retrieval import retrieve_and_rerank
 import pandas as pd
 
-# === Test Type Decoder ===
 TEST_TYPE_MAP = {
     "A": "Ability & Aptitude",
     "B": "Biodata & Situational Judgement",
@@ -33,15 +32,14 @@ def format_results(raw_results):
         })
     return pd.DataFrame(formatted)
 
-# === Gradio Interface Logic ===
 def format_results_for_display(raw_results):
     return pd.DataFrame(raw_results)
 
 def recommend_with_download(query_input: str):
     try:
-        print("📥 Received:", query_input)
+        print(" Received:", query_input)
         refined_query = preprocess_input(query_input)
-        print("🔍 Refined:", refined_query)
+        print(" Refined:", refined_query)
 
         results = retrieve_and_rerank(refined_query)
         if not results:
@@ -57,7 +55,7 @@ def recommend_with_download(query_input: str):
         return f"{len(df)} results found.", df, temp_file.name
 
     except Exception as e:
-        print("❌ Error:", e)
+        print(" Error:", e)
         return str(e), pd.DataFrame(), None
 
 # === Gradio UI ===
@@ -67,7 +65,7 @@ gr.Interface(
     outputs=[
         gr.Textbox(label="Status"),
         gr.Dataframe(label="Top 10 Recommended Assessments", wrap=True),
-        gr.File(label="📥 Download CSV")
+        gr.File(label="📥Download CSV")
     ],
     title="SHL Assessment Recommender",
     description="Paste a natural language query, a full JD, or a JD URL to get the top 10 assessment matches.",

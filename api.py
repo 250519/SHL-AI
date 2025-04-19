@@ -24,11 +24,9 @@ TEST_TYPE_MAP = {
 def decode_test_type(code: str) -> str:
     return ", ".join(TEST_TYPE_MAP.get(c.strip(), c) for c in code if c.strip() in TEST_TYPE_MAP)
 
-# === 3. Request schema ===
 class RecommendationRequest(BaseModel):
     input: str
 
-# === 4. Response schema ===
 class Assessment(BaseModel):
     Test_Name: str
     URL: str
@@ -38,7 +36,6 @@ class Assessment(BaseModel):
     Adaptive_Support: str
     Test_Type: str
 
-# === 5. Main Recommend Endpoint ===
 @app.post("/recommend", response_model=List[Assessment])
 def recommend_assessments(payload: RecommendationRequest):
     try:

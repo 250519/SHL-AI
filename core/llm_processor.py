@@ -11,7 +11,6 @@ def is_url(text: str) -> bool:
     return text.startswith("http://") or text.startswith("https://")
 
 def is_probable_jd(text: str) -> bool:
-    # Heuristic: if the text is long, contains bullet points or JD terms, treat as JD
     return (
         len(text.split()) > 50 or (
             "responsibilities" in text.lower() or

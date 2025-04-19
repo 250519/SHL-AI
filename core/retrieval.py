@@ -18,14 +18,14 @@ def get_index():
         pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
         return pc.Index("shl")
     except Exception as e:
-        print(f"❌ Pinecone init failed: {e}")
+        print(f" Pinecone init failed: {e}")
         print("⏳ Retrying in 3s...")
         time.sleep(3)
         try:
             pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
             return pc.Index("shl")
         except Exception as inner_e:
-            print(f"❌ Retry failed: {inner_e}")
+            print(f"Retry failed: {inner_e}")
             raise inner_e
         
 
@@ -94,7 +94,7 @@ Duration: {md.get('Assessment Length', '')}
     reranked = []
 
     try:
-        print("🔄 Gemini rerank started...")
+        print(" Gemini rerank started...")
         response = llm.generate_content(prompt)
         response_text = response.text.strip()
 
@@ -104,11 +104,11 @@ Duration: {md.get('Assessment Length', '')}
 
         print("🧾 Gemini raw output (trimmed):\n", response_text[:1000])
         reranked = json.loads(response_text)
-        print("✅ Parsed reranked list:", reranked)
+        print(" Parsed reranked list:", reranked)
 
     except Exception as e:
-        print(f"❌ Failed to rerank: {e}")
-        print(f"🧾 Raw response (if available):\n{locals().get('response_text', 'N/A')}")
+        print(f"Failed to rerank: {e}")
+        print(f"Raw response (if available):\n{locals().get('response_text', 'N/A')}")
         reranked = []
 
     # Step 4: Parse reranked results
@@ -132,5 +132,5 @@ Duration: {md.get('Assessment Length', '')}
             "Reason": reason
         })
 
-    print("✅ Final results count:", len(final_results))
+    print("Final results count:", len(final_results))
     return final_results
