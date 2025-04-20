@@ -147,7 +147,7 @@ def retrieve_and_rerank(query: str, top_k: int = 50) -> List[Dict]:
         md = id_map.get(aid)
 
         if not md:
-            print(f"⚠️ ID {aid} not found in id_map — skipping.")
+            print(f" ID {aid} not found in id_map — skipping.")
             continue
 
         final_results.append({
