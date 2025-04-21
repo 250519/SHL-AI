@@ -9,7 +9,7 @@ import urllib.parse
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-class SHLScraper:
+class Scraper:
     def __init__(self):
         self.base_url = "https://www.shl.com/solutions/products/product-catalog/"
         self.headers = {
@@ -159,7 +159,7 @@ class SHLScraper:
         logging.info(f"Saved {len(data)} records to {filename}")
 
 def main():
-    scraper = SHLScraper()
+    scraper = Scraper()
     logging.info("Starting SHL product catalog scraping (Enhanced)...")
 
     data = scraper.scrape_all_tables(max_pages=100, max_results=None)
