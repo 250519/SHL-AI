@@ -111,7 +111,7 @@ class Scraper:
 
                     data = {
                         'Test Name': test_name,
-                        'Test Link': test_link,  # full URL now
+                        'Test Link': test_link,  
                         'Remote Testing': remote_testing,
                         'Adaptive/IRT': adaptive_irt,
                         'Test Type': test_type,
