@@ -52,7 +52,7 @@ def build_prompt(query: str, blocks: List[str]) -> str:
     return f"""
 You are an expert assistant helping HR teams and recruiters select the most relevant assessments for their hiring needs.
 
-Given a natural language hiring query or Job description of a job and a list of available assessments, your task is to intelligently rank and recommend the top 10 most relevant assessments.
+Given a natural language hiring query or Job description of a job and a list of available assessments, your task is to intelligently rank and recommend the top 8 most relevant assessments.
 
 Assessments are described using their title, description, tags, target job level, and duration. The user query may include specific technical and soft skills, job roles, team collaboration needs, or constraints like duration (e.g., "within 40 minutes").
 
@@ -85,7 +85,7 @@ Assessments:
 {''.join(blocks)}
 """
 
-def retrieve_and_rerank(query: str, top_k: int = 50) -> List[Dict]:
+def retrieve_and_rerank(query: str, top_k: int = 60) -> List[Dict]:
     query_vector = model.encode(query).tolist()
 
     # Step 1: Retrieve from Pinecone
@@ -131,7 +131,7 @@ def retrieve_and_rerank(query: str, top_k: int = 50) -> List[Dict]:
         response_text = re.sub(r"^```json\s*", "", response_text)
         response_text = re.sub(r"```$", "", response_text).strip()
 
-        print("🧾 Gemini raw output (trimmed):\n", response_text[:1000])
+        print(" Gemini raw output (trimmed):\n", response_text[:1000])
         reranked = json.loads(response_text)
         print(" Parsed reranked list:", reranked)
 
